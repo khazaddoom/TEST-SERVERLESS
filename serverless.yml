@@ -1,0 +1,32 @@
+# serverless.yml
+service: expenses-service
+
+provider:
+  name: aws
+  runtime: nodejs8.10
+  stage: api
+  region: us-east-1
+  memorySize: 512
+
+functions:
+  expensesFunction:
+    handler: index.handler
+    events:
+      - http:
+          path: expenses
+          method: get
+      - http:
+          path: expenses/{id}
+          method: get
+      - http:
+          path: expenses
+          method: post
+      - http:
+          path: expenses/{id}
+          method: put
+      - http:
+          path: expenses/{id}
+          method: delete
+
+plugins:
+  - serverless-offline
